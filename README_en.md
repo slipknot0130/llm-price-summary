@@ -5,6 +5,14 @@
 
 ---
 
+## 💡 Why This Project
+
+This project was created so that everyone can **get the pricing rules of mainstream LLMs simply and quickly**. There are similar tools on GitHub, but many of them are either no longer maintained or stuck with hardcoded price tables that can never be updated automatically — so when you open them, the models are still last year's versions and the prices no longer match reality.
+
+The goal here is simple: **when you want to check the latest pricing at the first moment, one click gets you the freshest numbers, without visiting every vendor's site one by one**. By default every run fetches the latest prices live from an online dataset — that is what "one-click query" truly means.
+
+---
+
 ## ✨ Features
 
 - **Live fetch by default**: Running `python main.py` **always** pulls the latest token prices from the community-maintained LiteLLM dataset and regenerates the summary. Only `--no-update` (offline emergency) uses the local cache, and it prints a prominent warning.
@@ -69,7 +77,7 @@ Just **Python 3.8+**. No third-party libraries.
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/<your-username>/llm-price-summary.git
+git clone https://github.com/slipknot0130/llm-price-summary.git
 cd llm-price-summary
 
 # 2. Fetch the latest prices and generate the summary (live by default)
