@@ -1,0 +1,23 @@
+[
+  {"provider":"OpenAI","display":"GPT-4o","prefix":"gpt-4o","litellm_key":"gpt-4o"},
+  {"provider":"OpenAI","display":"GPT-4o mini","prefix":"gpt-4o-mini","litellm_key":"gpt-4o-mini"},
+  {"provider":"OpenAI","display":"o1","prefix":"o1","litellm_key":"o1"},
+  {"provider":"OpenAI","display":"o3-mini","prefix":"o3-mini","litellm_key":"o3-mini"},
+  {"provider":"OpenAI","display":"GPT-4.1","prefix":"gpt-4.1","litellm_key":"gpt-4.1"},
+  {"provider":"Anthropic","display":"Claude 3.5 Sonnet","prefix":"claude-3-5-sonnet","litellm_key":"anthropic.claude-3-5-sonnet-20241022-v2:0"},
+  {"provider":"Anthropic","display":"Claude 3.7 Sonnet","prefix":"claude-3-7-sonnet","litellm_key":"claude-3-7-sonnet-20250219"},
+  {"provider":"Anthropic","display":"Claude 3 Opus","prefix":"claude-3-opus","litellm_key":"claude-3-opus-20240229"},
+  {"provider":"Anthropic","display":"Claude 3 Haiku","prefix":"claude-3-haiku","litellm_key":"claude-3-haiku-20240307"},
+  {"provider":"Google","display":"Gemini 2.0 Flash","prefix":"gemini/gemini-2.0-flash","litellm_key":"gemini/gemini-2.0-flash"},
+  {"provider":"Google","display":"Gemini 2.5 Pro","prefix":"gemini/gemini-2.5-pro","litellm_key":"gemini/gemini-2.5-pro"},
+  {"provider":"DeepSeek","display":"DeepSeek-V3 (deepseek-chat)","prefix":"deepseek/","litellm_key":"deepseek/deepseek-chat","override":"deepseek-chat"},
+  {"provider":"DeepSeek","display":"DeepSeek-R1 (reasoner)","prefix":"deepseek/","litellm_key":"deepseek/deepseek-reasoner","override":"deepseek-reasoner"},
+  {"provider":"阿里通义","display":"Qwen-Max","prefix":"dashscope/qwen-max","litellm_key":"dashscope/qwen-max"},
+  {"provider":"阿里通义","display":"Qwen-Plus","prefix":"dashscope/qwen-plus","litellm_key":"dashscope/qwen-plus"},
+  {"provider":"阿里通义","display":"Qwen-Turbo","prefix":"dashscope/qwen-turbo","litellm_key":"dashscope/qwen-turbo"},
+  {"provider":"Moonshot","display":"Kimi (K2)","prefix":"moonshot/","litellm_key":"moonshot/kimi-k2"},
+  {"provider":"Meta","display":"Llama 3.3 70B","prefix":"deepinfra/meta-llama/Llama-3.3-70B-Instruct","litellm_key":"deepinfra/meta-llama/Llama-3.3-70B-Instruct"},
+  {"provider":"Meta","display":"Llama 3.1 405B","prefix":"Meta-Llama-3.1-405B-Instruct","litellm_key":"azure_ai/Meta-Llama-3.1-405B-Instruct"},
+  {"provider":"Mistral","display":"Mistral Large","prefix":"mistral/","litellm_key":"mistral/mistral-large-latest"},
+  {"provider":"Mistral","display":"Mixtral 8x7B","prefix":"mistral/","litellm_key":"mistral/mixtral-8x7b-instruct"}
+]

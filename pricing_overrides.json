@@ -1,0 +1,14 @@
+{
+  "deepseek-chat": {
+    "currency": "¥",
+    "peak":    {"input_miss": 1.0, "output": 2.0,  "cache_hit_input": 0.1},
+    "offpeak": {"input_miss": 0.5, "output": 1.0,  "cache_hit_input": 0.1, "window": "北京时间 00:30–08:30"},
+    "note": "深度求索峰谷分时计费，夜间优惠时段价格更低（官方人民币计价）"
+  },
+  "deepseek-reasoner": {
+    "currency": "¥",
+    "peak":    {"input_miss": 4.0, "output": 16.0, "cache_hit_input": 1.0},
+    "offpeak": {"input_miss": 1.0, "output": 4.0,  "cache_hit_input": 1.0, "window": "北京时间 00:30–08:30"},
+    "note": "R1 推理模型，峰谷计费，缓存命中输入 ¥1/百万（官方人民币计价）"
+  }
+}

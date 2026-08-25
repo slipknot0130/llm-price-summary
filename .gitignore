@@ -1,0 +1,15 @@
+# WorkBuddy 项目私有记忆，不入库
+.workbuddy/
+
+# 自动生成的产物（运行 python main.py 后生成）
+model_prices_cache.json
+LLM价格汇总.md
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# 系统文件
+.DS_Store
+Thumbs.db
