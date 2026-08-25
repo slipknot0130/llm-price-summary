@@ -1,14 +1,14 @@
 {
-  "deepseek-chat": {
+  "deepseek-v4-flash": {
     "currency": "¥",
-    "peak":    {"input_miss": 1.0, "output": 2.0,  "cache_hit_input": 0.1},
-    "offpeak": {"input_miss": 0.5, "output": 1.0,  "cache_hit_input": 0.1, "window": "北京时间 00:30–08:30"},
-    "note": "深度求索峰谷分时计费，夜间优惠时段价格更低（官方人民币计价）"
+    "peak":    {"input_miss": 3.0, "output": 9.0,  "cache_hit_input": 0.1},
+    "offpeak": {"input_miss": 1.5, "output": 4.5,  "cache_hit_input": 0.05, "window": "工作日 00:00–9:00、12:00–14:00、18:00–24:00；周末及节假日全天（北京时间）"},
+    "note": "DeepSeek V4-Flash 峰谷计费（2026-08-17 起生效）：高峰 9:00–12:00、14:00–18:00，低谷价为高峰一半"
   },
-  "deepseek-reasoner": {
+  "deepseek-v4-pro": {
     "currency": "¥",
-    "peak":    {"input_miss": 4.0, "output": 16.0, "cache_hit_input": 1.0},
-    "offpeak": {"input_miss": 1.0, "output": 4.0,  "cache_hit_input": 1.0, "window": "北京时间 00:30–08:30"},
-    "note": "R1 推理模型，峰谷计费，缓存命中输入 ¥1/百万（官方人民币计价）"
+    "peak":    {"input_miss": 9.0, "output": 27.0, "cache_hit_input": 0.3},
+    "offpeak": {"input_miss": 4.5, "output": 13.5, "cache_hit_input": 0.15, "window": "工作日 00:00–9:00、12:00–14:00、18:00–24:00；周末及节假日全天（北京时间）"},
+    "note": "DeepSeek V4-Pro 峰谷计费（2026-08-17 起生效）：高峰 9:00–12:00、14:00–18:00，低谷半价；周末全天按低谷"
   }
 }

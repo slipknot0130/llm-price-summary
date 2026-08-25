@@ -66,6 +66,7 @@ def run(data):
     L.append("# 大语言模型（LLM）价格汇总\n")
     L.append(f"> 更新时间：**{now}（本地时间）**  ")
     L.append("> 数据来源：Token 价格来自社区维护的公开数据集 [LiteLLM model_prices](https://github.com/BerriAI/litellm)；订阅 / 峰谷价格由各厂商官网整理。  ")
+    L.append("> 🔄 **本文件默认实时生成**：每次运行 `python main.py` 都会从 LiteLLM 在线数据集拉取最新价格（除非使用 `--no-update` 离线模式）。要拿到最新价，直接重跑命令即可。  ")
     L.append("> ⚠️ 本表为公开整理，**仅供参考，请以各厂商官网实时报价为准**。\n")
 
     L.append("## 一、订阅 / 套餐价格\n")

@@ -23,9 +23,15 @@ def main():
 
     if args.no_update:
         data, _ = fetch_prices.load_cache()
+        print("⚠️ 离线模式（--no-update）：使用本地缓存，价格可能不是最新的。")
     else:
         data, ok = fetch_prices.update_cache()
-        print("价格缓存更新：" + ("成功（在线）" if ok else "失败，已回退本地缓存"))
+        if ok:
+            print("✅ 已实时拉取最新在线价格（LiteLLM 公开数据集，共 "
+                  + str(len(data)) + " 个模型）。")
+        else:
+            print("⚠️ 在线价格拉取失败，已回退到本地缓存（数据可能不是最新的）。"
+                  "建议联网后重新运行 `python main.py`。")
 
     out = generate_md.run(data)
     print("已生成：" + out)
