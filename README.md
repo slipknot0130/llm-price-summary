@@ -1,5 +1,11 @@
 # LLM 价格汇总 · 一键查询所有大语言模型定价
 
+[![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-None-brightgreen.svg)](./requirements.txt)
+[![Live Data](https://img.shields.io/badge/Data-Live%20Fetch-orange.svg)](https://github.com/BerriAI/litellm)
+[![Models Covered](https://img.shields.io/badge/Models-28%20%7C%202026-blueviolet.svg)](./watchlist.json)
+
 > 一个**零依赖**的本地 Python 小工具：把市面上主流大语言模型（LLM）的 **订阅 / 套餐价** 与 **API Token 价** 汇总成一份 Markdown 文件。
 > **核心保证：默认每次运行都实时从在线数据集拉取最新价格，你查到的永远是最新价，不会一直用旧数据。**
 
@@ -176,3 +182,11 @@ open "LLM价格汇总.md"
 ## 📄 许可证
 
 本项目基于 [MIT License](./LICENSE) 开源。
+
+---
+
+## ⭐ 支持这个项目
+
+如果这个工具帮到了你，欢迎 **Star ⭐** 本仓库——你的每一个 Star 都是对持续维护的最大鼓励！
+
+觉得哪里可以更好？欢迎提 [Issue](https://github.com/slipknot0130/llm-price-summary/issues) 或 [Pull Request](https://github.com/slipknot0130/llm-price-summary/pulls)，一起让这份价格表更准、更全。

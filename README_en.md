@@ -1,5 +1,11 @@
 # LLM Price Summary · One-Click Pricing for All Large Language Models
 
+[![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-None-brightgreen.svg)](./requirements.txt)
+[![Live Data](https://img.shields.io/badge/Data-Live%20Fetch-orange.svg)](https://github.com/BerriAI/litellm)
+[![Models Covered](https://img.shields.io/badge/Models-28%20%7C%202026-blueviolet.svg)](./watchlist.json)
+
 > A **zero-dependency** local Python tool that compiles the **subscription / plan prices** and **API token prices** of mainstream Large Language Models (LLMs) into a single Markdown file.
 > **Core guarantee: by default every run fetches the latest prices live from an online dataset, so you always see up-to-date prices instead of stale cached data.**
 
@@ -174,3 +180,11 @@ Make it executable: `chmod +x 更新价格.command`.
 ## 📄 License
 
 Released under the [MIT License](./LICENSE).
+
+---
+
+## ⭐ Support This Project
+
+If this tool helped you, please **Star ⭐** the repo — every star is a huge encouragement to keep it up-to-date!
+
+Have ideas for improvement? Feel free to open an [Issue](https://github.com/slipknot0130/llm-price-summary/issues) or send a [Pull Request](https://github.com/slipknot0130/llm-price-summary/pulls). Let's make this price tracker more accurate and comprehensive together.
