@@ -183,34 +183,54 @@ def run(data):
   <div class="warn">⚠️ 本页面为公开整理，<b>仅供参考，请以各厂商官网实时报价为准</b>。想拿到最新价，重跑 <code>python main.py</code> 即可实时更新。</div>
 
   <section>
-    <h2>一、订阅 / 套餐价格</h2>
-    <table>
-      <thead><tr><th>厂商</th><th>套餐</th><th>价格</th><th>包含 / 额度</th><th>备注</th><th>购买</th></tr></thead>
-      <tbody>
-""")
+    <h2>一、订阅 / 套餐价格</h2>""")
 
+    # 按供应商分组（保序），每个供应商只展示一个购买按钮
+    from collections import OrderedDict
+    sub_grouped = OrderedDict()
+    sub_provider_buy = OrderedDict()
     for s in sub:
-        buy = f'<a class="buy" href="{s["buy_url"]}" target="_blank">官网 ↗</a>' if s.get("buy_url") else "—"
-        parts.append(
-            f"<tr><td>{s.get('provider','')}</td><td>{s.get('plan','')}</td>"
-            f"<td>{s.get('price','')}</td><td>{s.get('included','')}</td>"
-            f"<td class='note'>{s.get('note','')}</td>"
-            f"<td>{buy}</td></tr>"
+        p = s.get("provider", "")
+        if p not in sub_grouped:
+            sub_grouped[p] = []
+            sub_provider_buy[p] = ""
+        sub_grouped[p].append(s)
+        if s.get("buy_url") and not sub_provider_buy[p]:
+            sub_provider_buy[p] = s["buy_url"]
+    for prov, plans in sub_grouped.items():
+        buy_html = (
+            f' <a class="buy" href="{sub_provider_buy[prov]}" target="_blank">官网 ↗</a>'
+            if sub_provider_buy.get(prov) else ""
         )
-
-    parts.append("</tbody></table></section>")
+        parts.append(f"<h3>{prov}{buy_html}</h3>")
+        parts.append(
+            '<table><thead><tr><th>套餐</th><th>价格</th><th>包含 / 额度</th><th>备注</th></tr></thead><tbody>'
+        )
+        for s in plans:
+            parts.append(
+                f"<tr><td>{s.get('plan','')}</td>"
+                f"<td>{s.get('price','')}</td>"
+                f"<td>{s.get('included','')}</td>"
+                f"<td class='note'>{s.get('note','')}</td></tr>"
+            )
+        parts.append("</tbody></table>")
+    parts.append("</section>")
 
     parts.append('<section><h2>二、Token 价格（API 按量）</h2>'
                  '<p class="note">价格统一换算为「每百万 (1M) tokens」计价，便于横向对比；凡峰谷计费模型单独列出峰时 / 谷时。</p>')
     for prov, rows in groups.items():
-        parts.append(f"<h3>{prov}</h3>")
+        prov_buy = rows[0].get("buy", "") if rows else ""
+        prov_btn = (
+            f' <a class="buy" href="{prov_buy}" target="_blank">官网 ↗</a>'
+            if prov_buy else ""
+        )
+        parts.append(f"<h3>{prov}{prov_btn}</h3>")
         has_peak = any(r["type"] == "peak" for r in rows)
         if has_peak:
             parts.append('<table><thead><tr><th>模型</th><th>峰时输入</th><th>峰时输出</th>'
                          '<th>谷时输入</th><th>谷时输出</th><th>缓存命中输入</th>'
-                         '<th>上下文</th><th>优惠时段</th><th>备注</th><th>购买</th></tr></thead><tbody>')
+                         '<th>上下文</th><th>优惠时段</th><th>备注</th></tr></thead><tbody>')
             for r in rows:
-                buy = f'<a class="buy" href="{r['buy']}" target="_blank">官网 ↗</a>' if r.get("buy") else "—"
                 if r["type"] == "peak":
                     parts.append(
                         f"<tr><td>{r['display']}</td>"
@@ -221,8 +241,7 @@ def run(data):
                         f"<td>{fmt_money(r['cache_in'], r['cur'])}</td>"
                         f"<td>{human_ctx(r['context'])}</td>"
                         f"<td class='note'>{r.get('window','')}</td>"
-                        f"<td class='note'>{r.get('note','')}</td>"
-                        f"<td>{buy}</td></tr>")
+                        f"<td class='note'>{r.get('note','')}</td></tr>")
                 else:
                     parts.append(
                         f"<tr><td>{r['display']}</td>"
@@ -232,21 +251,18 @@ def run(data):
                         f"<td>{fmt_money(r['cache_in'], r['cur'])}</td>"
                         f"<td>{human_ctx(r['context'])}</td>"
                         f"<td>—</td>"
-                        f"<td class='note'>{r.get('note','')}</td>"
-                        f"<td>{buy}</td></tr>")
+                        f"<td class='note'>{r.get('note','')}</td></tr>")
         else:
             parts.append('<table><thead><tr><th>模型</th><th>输入</th><th>输出</th>'
-                         '<th>缓存命中输入</th><th>上下文</th><th>备注</th><th>购买</th></tr></thead><tbody>')
+                         '<th>缓存命中输入</th><th>上下文</th><th>备注</th></tr></thead><tbody>')
             for r in rows:
-                buy = f'<a class="buy" href="{r['buy']}" target="_blank">官网 ↗</a>' if r.get("buy") else "—"
                 parts.append(
                     f"<tr><td>{r['display']}</td>"
                     f"<td>{fmt_money(r['in'], r['cur'])}</td>"
                     f"<td>{fmt_money(r['out'], r['cur'])}</td>"
                     f"<td>{fmt_money(r['cache_in'], r['cur'])}</td>"
                     f"<td>{human_ctx(r['context'])}</td>"
-                    f"<td class='note'>{r.get('note','')}</td>"
-                    f"<td>{buy}</td></tr>")
+                    f"<td class='note'>{r.get('note','')}</td></tr>")
         parts.append("</tbody></table>")
 
     parts.append("</section>")

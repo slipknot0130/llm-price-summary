@@ -71,27 +71,45 @@ def run(data):
     L.append("> ⚠️ 本表为公开整理，**仅供参考，请以各厂商官网实时报价为准**。\n")
 
     L.append("## 一、订阅 / 套餐价格\n")
-    L.append("| 厂商 | 套餐 | 价格 | 包含 / 额度 | 备注 | 购买 |")
-    L.append("| --- | --- | --- | --- | --- | --- |")
+    # 按供应商分组（保序），每个供应商仅展示一次购买链接
+    from collections import OrderedDict
+    sub_grouped = OrderedDict()
+    sub_provider_buy = OrderedDict()
     for s in sub:
-        buy = ("[" + ("官网" if s.get("buy_url") else "—") + "](" + s["buy_url"] + ")") if s.get("buy_url") else "—"
-        L.append(
-            f"| {s.get('provider','')} | {s.get('plan','')} | {s.get('price','')} "
-            f"| {s.get('included','')} | {s.get('note','')} | {buy} |"
-        )
-    L.append("")
+        p = s.get("provider", "")
+        if p not in sub_grouped:
+            sub_grouped[p] = []
+            sub_provider_buy[p] = ""
+        sub_grouped[p].append(s)
+        if s.get("buy_url") and not sub_provider_buy[p]:
+            sub_provider_buy[p] = s["buy_url"]
+    for prov, plans in sub_grouped.items():
+        L.append(f"### {prov}\n")
+        if sub_provider_buy.get(prov):
+            L.append(f"> 购买：[官网]({sub_provider_buy[prov]})\n")
+        L.append("| 套餐 | 价格 | 包含 / 额度 | 备注 |")
+        L.append("| --- | --- | --- | --- |")
+        for s in plans:
+            L.append(
+                f"| {s.get('plan','')} | {s.get('price','')} "
+                f"| {s.get('included','')} | {s.get('note','')} |"
+            )
+        L.append("")
 
     L.append("## 二、Token 价格（API 按量）\n")
     L.append("> 价格统一换算为「每百万 (1M) tokens」计价，便于横向对比。\n")
     for prov, rows in groups.items():
         L.append(f"### {prov}\n")
+        prov_buy = rows[0].get("buy", "") if rows else ""
+        if prov_buy:
+            L.append(f"> 购买：[官网]({prov_buy})\n")
         has_peak = any(r["type"] == "peak" for r in rows)
         if has_peak:
             L.append(
                 "| 模型 | 峰时输入 | 峰时输出 | 谷时输入 | 谷时输出 "
-                "| 缓存命中输入 | 上下文 | 优惠时段 | 备注 | 购买 |"
+                "| 缓存命中输入 | 上下文 | 优惠时段 | 备注 |"
             )
-            L.append("| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |")
+            L.append("| --- | --- | --- | --- | --- | --- | --- | --- | --- |")
             for r in rows:
                 if r["type"] == "peak":
                     L.append(
@@ -99,25 +117,24 @@ def run(data):
                         f"| {fmt_money(r['peak_out'], r['cur'])} | {fmt_money(r['off_in'], r['cur'])} "
                         f"| {fmt_money(r['off_out'], r['cur'])} | {fmt_money(r['cache_in'], r['cur'])} "
                         f"| {human_ctx(r['context'])} | {r.get('window','')} "
-                        f"| {r.get('note','')} | {('[官网](' + r['buy'] + ')') if r.get('buy') else '—'} |"
+                        f"| {r.get('note','')} |"
                     )
                 else:
                     L.append(
                         f"| {r['display']} | {fmt_money(r['in'], r['cur'])} "
                         f"| {fmt_money(r['out'], r['cur'])} | — | — "
                         f"| {fmt_money(r['cache_in'], r['cur'])} | {human_ctx(r['context'])} "
-                        f"| — "
-                        f"| {r.get('note','')} | {('[官网](' + r['buy'] + ')') if r.get('buy') else '—'} |"
+                        f"| — | {r.get('note','')} |"
                     )
         else:
-            L.append("| 模型 | 输入 | 输出 | 缓存命中输入 | 上下文 | 备注 | 购买 |")
-            L.append("| --- | --- | --- | --- | --- | --- | --- |")
+            L.append("| 模型 | 输入 | 输出 | 缓存命中输入 | 上下文 | 备注 |")
+            L.append("| --- | --- | --- | --- | --- | --- |")
             for r in rows:
                 L.append(
                     f"| {r['display']} | {fmt_money(r['in'], r['cur'])} "
                     f"| {fmt_money(r['out'], r['cur'])} | {fmt_money(r['cache_in'], r['cur'])} "
                     f"| {human_ctx(r['context'])} "
-                    f"| {r.get('note','')} | {('[官网](' + r['buy'] + ')') if r.get('buy') else '—'} |"
+                    f"| {r.get('note','')} |"
                 )
         L.append("")
 
