@@ -25,6 +25,8 @@ The goal here is simple: **when you want to check the latest pricing at the firs
 - **Dual price system**: Covers both **subscription / plan prices** (ChatGPT Plus, Claude Pro, Gemini AI Pro, etc.) and **API pay-as-you-go token prices**.
 - **Peak / off-peak pricing**: For time-of-day priced models like DeepSeek, a dedicated **peak / off-peak / cache-hit** column layout makes the price gap obvious (synced with the official 2026-08-17 repricing; weekends use off-peak all day).
 - **Offline fallback**: The online dataset is cached locally; `--no-update` still works offline (requires at least one prior online run).
+- **Web view**: By default it also generates `llm-price.html` — an interactive page with price-comparison charts and grouped tables that opens in any browser, even offline.
+- **One-click launcher**: Ships with `start.bat` (Windows) and `start.command` (macOS) — double-click to refresh prices and open the page automatically.
 - **Zero dependencies**: Standard library only — **no `pip install` needed**.
 - **Cross-platform**: Windows / macOS / Linux, Python 3.8+.
 - **Easy to extend**: Add/remove models via `watchlist.json`; tweak subscription / peak-off-peak prices via two JSON files.

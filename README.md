@@ -25,6 +25,8 @@
 - **双价体系**：同时覆盖「订阅 / 套餐价」（ChatGPT Plus / Claude Pro / Gemini AI Pro 等）与「API 按量 Token 价」。
 - **峰谷计费**：对 DeepSeek 这类分时计价模型，单独列出 **峰时 / 谷时 / 缓存命中** 价格，一眼看清价差（已同步 2026-08-17 官方调价，周末全天按低谷价）。
 - **离线兜底**：本地会自动缓存在线数据集，断网时可用 `--no-update` 生成（需至少联网运行过一次）。
+- **网页可视化**：默认同时生成 `llm-price.html`，内嵌价格对比图与分组表格，双击即可在浏览器查看，无需联网也能打开。
+- **一键启动**：仓库附带 `start.bat`（Windows）与 `start.command`（macOS），双击即更新价格并自动打开网页。
 - **零依赖**：只使用 Python 标准库，**无需 `pip install`**。
 - **跨平台**：Windows / macOS / Linux 通用，Python 3.8+ 即可。
 - **易扩展**：增删模型只改 `watchlist.json`；改订阅价 / 峰谷价只改两个 JSON 文件。
@@ -65,6 +67,9 @@
 ├── main.py                  # 入口：python main.py = 在线拉取最新价 + 生成
 ├── fetch_prices.py          # 拉取 / 缓存 LiteLLM 数据集，按 watchlist 归一化
 ├── generate_md.py           # 合并订阅 + Token 价，渲染 Markdown
+├── generate_html.py         # 合并订阅 + Token 价，渲染可离线打开的 HTML 网页
+├── start.bat                # Windows 一键启动（更新并打开网页）
+├── start.command            # macOS 一键启动（更新并打开网页）
 ├── watchlist.json           # 要追踪的主力模型清单（可增删）
 ├── subscription.json        # 订阅 / 套餐价（手动维护）
 ├── pricing_overrides.json   # 峰谷计费 / 特殊定价（手动维护）
