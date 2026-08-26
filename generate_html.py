@@ -12,6 +12,17 @@ from fetch_prices import per_million, resolve
 BASE = os.path.dirname(os.path.abspath(__file__))
 
 
+def _load_settings():
+    try:
+        return json.load(open(os.path.join(BASE, "settings.json"), encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+SETTINGS = _load_settings()
+RATE_USD_CNY = float(SETTINGS.get("usd_to_cny", 7.25))
+
+
 def fmt_money(v, cur="$"):
     if v is None:
         return "—"
@@ -74,21 +85,42 @@ def build_rows(data):
 
 
 def _chart(chart_rows):
-    # 取有效数值用于缩放
-    vals = [v[1] for v in chart_rows if isinstance(v[1], (int, float))]
+    # 把美元统一换算成人民币再画柱，避免 $ 与 ¥ 直接比数字产生的幻觉
+    rate = RATE_USD_CNY
+
+    def to_cny(v, cur):
+        if not isinstance(v, (int, float)):
+            return None, "—"
+        if cur == "$":
+            return v * rate, f"¥{v * rate:.2f}"
+        return v, f"¥{v:g}"
+
+    converted = []
+    for label, value, cur, is_peak, off_val in chart_rows:
+        cny_val, cny_text = to_cny(value, cur)
+        off_cny_val, off_cny_text = to_cny(off_val, cur) if is_peak else (None, "—")
+        converted.append((label, cny_val, cny_text, is_peak, off_val, cur, off_cny_val, off_cny_text))
+
+    vals = [c[1] for c in converted if isinstance(c[1], (int, float))]
     if not vals:
         return ""
     mx = max(vals)
     if mx <= 0:
         mx = 1
 
-    def bar(label, value, cur, is_peak, off_val):
-        pct = (value / mx * 100) if isinstance(value, (int, float)) else 0
+    def bar(label, cny_val, cny_text, is_peak, off_val_orig, cur_orig, off_cny_val, off_cny_text):
+        pct = (cny_val / mx * 100) if isinstance(cny_val, (int, float)) else 0
         fill = "#e74c3c" if is_peak else "#2563eb"
-        val_text = "—" if not isinstance(value, (int, float)) else fmt_money(value, cur)
+        val_text = "—" if not isinstance(cny_val, (int, float)) else cny_text
         extra = ""
-        if is_peak and isinstance(off_val, (int, float)):
-            extra = f'<span class="peak-sub">峰 {val_text} · 谷 {fmt_money(off_val, cur)}</span>'
+        if is_peak and isinstance(off_cny_val, (int, float)):
+            orig_off_text = (
+                f"¥{off_val_orig:g}" if cur_orig == "¥" else f"${off_val_orig:g}"
+            )
+            extra = (
+                f'<span class="peak-sub">峰 {val_text} · 谷 {off_cny_text}'
+                f'<span style="color:#999">（原 {orig_off_text}）</span></span>'
+            )
         elif is_peak:
             extra = f'<span class="peak-sub">峰 {val_text}</span>'
         return f'''
@@ -100,11 +132,11 @@ def _chart(chart_rows):
           <div class="bar-val">{val_text}</div>
         </div>{extra}'''
 
-    rows_html = "".join(bar(*c) for c in chart_rows)
+    rows_html = "".join(bar(*c) for c in converted)
     return f'''
     <div class="chart">
-      <div class="chart-title">API 输出价对比（每百万 tokens）</div>
-      <div class="chart-sub">柱长按价格比例缩放 · 红=峰时计费(¥)　蓝=标准计费($)</div>
+      <div class="chart-title">API 输出价对比（每百万 tokens，已统一换算为人民币）</div>
+      <div class="chart-sub">柱长按人民币价格比例缩放 · 红=峰时计费　蓝=标准计费 · 汇率 1 USD ≈ ¥{rate:g}（可在 settings.json 中调整）</div>
       {rows_html}
     </div>'''
 
