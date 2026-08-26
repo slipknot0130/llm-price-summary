@@ -68,6 +68,7 @@ def build_rows(data):
             row["cache_in"] = per_million(m.get("cache_read_input_token_cost"))
             row["note"] = override.get("note", "") if override else ""
             chart_rows.append((row["display"], row["out"], "$", False, None))
+        row["buy"] = e.get("buy_url", "")
         groups.setdefault(prov, []).append(row)
     return groups, sub, not_found, chart_rows
 
@@ -141,6 +142,9 @@ def run(data):
   th,td {{ border:1px solid #e6e8ec; padding:8px 10px; text-align:left; }}
   th {{ background:#f0f4ff; color:#1a1a1a; }}
   tbody tr:nth-child(even) {{ background:#fafbfc; }}
+  a.buy {{ display:inline-block; background:#2563eb; color:#fff; text-decoration:none;
+          padding:3px 10px; border-radius:6px; font-size:12px; font-weight:600; }}
+  a.buy:hover {{ background:#1d4ed8; }}
   .note {{ color:#888; font-size:13px; }}
   .chart {{ background:#fff; border:1px solid #e6e8ec; border-radius:12px; padding:20px; }}
   .chart-title {{ font-weight:700; margin-bottom:4px; }}
@@ -199,8 +203,9 @@ def run(data):
         if has_peak:
             parts.append('<table><thead><tr><th>模型</th><th>峰时输入</th><th>峰时输出</th>'
                          '<th>谷时输入</th><th>谷时输出</th><th>缓存命中输入</th>'
-                         '<th>上下文</th><th>优惠时段</th><th>备注</th></tr></thead><tbody>')
+                         '<th>上下文</th><th>优惠时段</th><th>备注</th><th>购买</th></tr></thead><tbody>')
             for r in rows:
+                buy = f'<a class="buy" href="{r['buy']}" target="_blank">官网 ↗</a>' if r.get("buy") else "—"
                 if r["type"] == "peak":
                     parts.append(
                         f"<tr><td>{r['display']}</td>"
@@ -211,7 +216,8 @@ def run(data):
                         f"<td>{fmt_money(r['cache_in'], r['cur'])}</td>"
                         f"<td>{human_ctx(r['context'])}</td>"
                         f"<td class='note'>{r.get('window','')}</td>"
-                        f"<td class='note'>{r.get('note','')}</td></tr>")
+                        f"<td class='note'>{r.get('note','')}</td>"
+                        f"<td>{buy}</td></tr>")
                 else:
                     parts.append(
                         f"<tr><td>{r['display']}</td>"
@@ -221,18 +227,21 @@ def run(data):
                         f"<td>{fmt_money(r['cache_in'], r['cur'])}</td>"
                         f"<td>{human_ctx(r['context'])}</td>"
                         f"<td>—</td>"
-                        f"<td class='note'>{r.get('note','')}</td></tr>")
+                        f"<td class='note'>{r.get('note','')}</td>"
+                        f"<td>{buy}</td></tr>")
         else:
             parts.append('<table><thead><tr><th>模型</th><th>输入</th><th>输出</th>'
-                         '<th>缓存命中输入</th><th>上下文</th><th>备注</th></tr></thead><tbody>')
+                         '<th>缓存命中输入</th><th>上下文</th><th>备注</th><th>购买</th></tr></thead><tbody>')
             for r in rows:
+                buy = f'<a class="buy" href="{r['buy']}" target="_blank">官网 ↗</a>' if r.get("buy") else "—"
                 parts.append(
                     f"<tr><td>{r['display']}</td>"
                     f"<td>{fmt_money(r['in'], r['cur'])}</td>"
                     f"<td>{fmt_money(r['out'], r['cur'])}</td>"
                     f"<td>{fmt_money(r['cache_in'], r['cur'])}</td>"
                     f"<td>{human_ctx(r['context'])}</td>"
-                    f"<td class='note'>{r.get('note','')}</td></tr>")
+                    f"<td class='note'>{r.get('note','')}</td>"
+                    f"<td>{buy}</td></tr>")
         parts.append("</tbody></table>")
 
     parts.append("</section>")

@@ -59,6 +59,7 @@ def run(data):
             row["out"] = per_million(m.get("output_cost_per_token"))
             row["cache_in"] = per_million(m.get("cache_read_input_token_cost"))
             row["note"] = override.get("note", "") if override else ""
+        row["buy"] = e.get("buy_url", "")
         groups.setdefault(prov, []).append(row)
 
     L = []
@@ -87,32 +88,35 @@ def run(data):
         if has_peak:
             L.append(
                 "| 模型 | 峰时输入 | 峰时输出 | 谷时输入 | 谷时输出 "
-                "| 缓存命中输入 | 上下文 | 优惠时段 | 备注 |"
+                "| 缓存命中输入 | 上下文 | 优惠时段 | 备注 | 购买 |"
             )
-            L.append("| --- | --- | --- | --- | --- | --- | --- | --- | --- |")
+            L.append("| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |")
             for r in rows:
                 if r["type"] == "peak":
                     L.append(
                         f"| {r['display']} | {fmt_money(r['peak_in'], r['cur'])} "
                         f"| {fmt_money(r['peak_out'], r['cur'])} | {fmt_money(r['off_in'], r['cur'])} "
                         f"| {fmt_money(r['off_out'], r['cur'])} | {fmt_money(r['cache_in'], r['cur'])} "
-                        f"| {human_ctx(r['context'])} | {r.get('window','')} | {r.get('note','')} |"
+                        f"| {human_ctx(r['context'])} | {r.get('window','')} "
+                        f"| {r.get('note','')} | {('[官网](' + r['buy'] + ')') if r.get('buy') else '—'} |"
                     )
                 else:
                     L.append(
                         f"| {r['display']} | {fmt_money(r['in'], r['cur'])} "
                         f"| {fmt_money(r['out'], r['cur'])} | — | — "
                         f"| {fmt_money(r['cache_in'], r['cur'])} | {human_ctx(r['context'])} "
-                        f"| — | {r.get('note','')} |"
+                        f"| — "
+                        f"| {r.get('note','')} | {('[官网](' + r['buy'] + ')') if r.get('buy') else '—'} |"
                     )
         else:
-            L.append("| 模型 | 输入 | 输出 | 缓存命中输入 | 上下文 | 备注 |")
-            L.append("| --- | --- | --- | --- | --- | --- |")
+            L.append("| 模型 | 输入 | 输出 | 缓存命中输入 | 上下文 | 备注 | 购买 |")
+            L.append("| --- | --- | --- | --- | --- | --- | --- |")
             for r in rows:
                 L.append(
                     f"| {r['display']} | {fmt_money(r['in'], r['cur'])} "
                     f"| {fmt_money(r['out'], r['cur'])} | {fmt_money(r['cache_in'], r['cur'])} "
-                    f"| {human_ctx(r['context'])} | {r.get('note','')} |"
+                    f"| {human_ctx(r['context'])} "
+                    f"| {r.get('note','')} | {('[官网](' + r['buy'] + ')') if r.get('buy') else '—'} |"
                 )
         L.append("")
 

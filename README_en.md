@@ -22,7 +22,8 @@ The goal here is simple: **when you want to check the latest pricing at the firs
 ## ✨ Features
 
 - **Live fetch by default**: Running `python main.py` **always** pulls the latest token prices from the community-maintained LiteLLM dataset and regenerates the summary. Only `--no-update` (offline emergency) uses the local cache, and it prints a prominent warning.
-- **Dual price system**: Covers both **subscription / plan prices** (ChatGPT Plus, Claude Pro, Gemini AI Pro, etc.) and **API pay-as-you-go token prices**.
+- **Dual price system**: Covers both **subscription / plan prices** (ChatGPT Plus, Claude Pro,  Gemini AI Pro, etc.) and **API pay-as-you-go token prices**.
+- **Buy links**: Every model row carries an official purchase / pricing-page link so you can jump straight to the vendor with one click.
 - **Peak / off-peak pricing**: For time-of-day priced models like DeepSeek, a dedicated **peak / off-peak / cache-hit** column layout makes the price gap obvious (synced with the official 2026-08-17 repricing; weekends use off-peak all day).
 - **Offline fallback**: The online dataset is cached locally; `--no-update` still works offline (requires at least one prior online run).
 - **Web view**: By default it also generates `llm-price.html` — an interactive page with price-comparison charts and grouped tables that opens in any browser, even offline.

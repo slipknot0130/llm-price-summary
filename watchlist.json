@@ -1,38 +1,38 @@
 [
-  {"provider":"OpenAI","display":"GPT-5.5","litellm_key":"gpt-5.5"},
-  {"provider":"OpenAI","display":"GPT-5.5 Pro","litellm_key":"gpt-5.5-pro"},
-  {"provider":"OpenAI","display":"GPT-5.4","litellm_key":"gpt-5.4"},
-  {"provider":"OpenAI","display":"GPT-5 mini","litellm_key":"gpt-5-mini"},
-  {"provider":"OpenAI","display":"GPT-5 nano","litellm_key":"gpt-5-nano"},
-  {"provider":"OpenAI","display":"o4-mini","litellm_key":"o4-mini"},
-  {"provider":"OpenAI","display":"o3","litellm_key":"o3"},
+  {"provider":"OpenAI","display":"GPT-5.5","litellm_key":"gpt-5.5","buy_url":"https://platform.openai.com/pricing"},
+  {"provider":"OpenAI","display":"GPT-5.5 Pro","litellm_key":"gpt-5.5-pro","buy_url":"https://platform.openai.com/pricing"},
+  {"provider":"OpenAI","display":"GPT-5.4","litellm_key":"gpt-5.4","buy_url":"https://platform.openai.com/pricing"},
+  {"provider":"OpenAI","display":"GPT-5 mini","litellm_key":"gpt-5-mini","buy_url":"https://platform.openai.com/pricing"},
+  {"provider":"OpenAI","display":"GPT-5 nano","litellm_key":"gpt-5-nano","buy_url":"https://platform.openai.com/pricing"},
+  {"provider":"OpenAI","display":"o4-mini","litellm_key":"o4-mini","buy_url":"https://platform.openai.com/pricing"},
+  {"provider":"OpenAI","display":"o3","litellm_key":"o3","buy_url":"https://platform.openai.com/pricing"},
 
-  {"provider":"Anthropic","display":"Claude Opus 4.5","litellm_key":"claude-opus-4-5"},
-  {"provider":"Anthropic","display":"Claude Sonnet 4.5","litellm_key":"claude-sonnet-4-5"},
-  {"provider":"Anthropic","display":"Claude Haiku 4.5","litellm_key":"claude-haiku-4-5"},
-  {"provider":"Anthropic","display":"Claude Fable 5","litellm_key":"claude-fable-5"},
+  {"provider":"Anthropic","display":"Claude Opus 4.5","litellm_key":"claude-opus-4-5","buy_url":"https://www.anthropic.com/pricing"},
+  {"provider":"Anthropic","display":"Claude Sonnet 4.5","litellm_key":"claude-sonnet-4-5","buy_url":"https://www.anthropic.com/pricing"},
+  {"provider":"Anthropic","display":"Claude Haiku 4.5","litellm_key":"claude-haiku-4-5","buy_url":"https://www.anthropic.com/pricing"},
+  {"provider":"Anthropic","display":"Claude Fable 5","litellm_key":"claude-fable-5","buy_url":"https://www.anthropic.com/pricing"},
 
-  {"provider":"Google","display":"Gemini 3.5 Flash","litellm_key":"gemini-3.5-flash"},
-  {"provider":"Google","display":"Gemini 3 Pro","litellm_key":"gemini-3-pro-preview"},
-  {"provider":"Google","display":"Gemini 3 Flash","litellm_key":"gemini-3-flash-preview"},
-  {"provider":"Google","display":"Gemini 2.5 Pro","litellm_key":"gemini/gemini-2.5-pro"},
-  {"provider":"Google","display":"Gemini 2.5 Flash","litellm_key":"gemini/gemini-2.5-flash"},
+  {"provider":"Google","display":"Gemini 3.5 Flash","litellm_key":"gemini-3.5-flash","buy_url":"https://ai.google.dev/pricing"},
+  {"provider":"Google","display":"Gemini 3 Pro","litellm_key":"gemini-3-pro-preview","buy_url":"https://ai.google.dev/pricing"},
+  {"provider":"Google","display":"Gemini 3 Flash","litellm_key":"gemini-3-flash-preview","buy_url":"https://ai.google.dev/pricing"},
+  {"provider":"Google","display":"Gemini 2.5 Pro","litellm_key":"gemini/gemini-2.5-pro","buy_url":"https://ai.google.dev/pricing"},
+  {"provider":"Google","display":"Gemini 2.5 Flash","litellm_key":"gemini/gemini-2.5-flash","buy_url":"https://ai.google.dev/pricing"},
 
-  {"provider":"DeepSeek","display":"DeepSeek-V4-Flash","litellm_key":"deepseek/deepseek-v4-flash","override":"deepseek-v4-flash"},
-  {"provider":"DeepSeek","display":"DeepSeek-V4-Pro","litellm_key":"deepseek/deepseek-v4-pro","override":"deepseek-v4-pro"},
+  {"provider":"DeepSeek","display":"DeepSeek-V4-Flash","litellm_key":"deepseek/deepseek-v4-flash","override":"deepseek-v4-flash","buy_url":"https://platform.deepseek.com"},
+  {"provider":"DeepSeek","display":"DeepSeek-V4-Pro","litellm_key":"deepseek/deepseek-v4-pro","override":"deepseek-v4-pro","buy_url":"https://platform.deepseek.com"},
 
-  {"provider":"阿里通义","display":"Qwen-Max","litellm_key":"dashscope/qwen-max"},
-  {"provider":"阿里通义","display":"Qwen-Plus","litellm_key":"dashscope/qwen-plus"},
-  {"provider":"阿里通义","display":"Qwen-Turbo","litellm_key":"dashscope/qwen-turbo"},
+  {"provider":"阿里通义","display":"Qwen-Max","litellm_key":"dashscope/qwen-max","buy_url":"https://dashscope.console.aliyun.com/"},
+  {"provider":"阿里通义","display":"Qwen-Plus","litellm_key":"dashscope/qwen-plus","buy_url":"https://dashscope.console.aliyun.com/"},
+  {"provider":"阿里通义","display":"Qwen-Turbo","litellm_key":"dashscope/qwen-turbo","buy_url":"https://dashscope.console.aliyun.com/"},
 
-  {"provider":"Moonshot","display":"Kimi K3","litellm_key":"moonshot/kimi-k3"},
-  {"provider":"Moonshot","display":"Kimi (latest)","litellm_key":"moonshot/kimi-latest"},
+  {"provider":"Moonshot","display":"Kimi K3","litellm_key":"moonshot/kimi-k3","buy_url":"https://platform.moonshot.cn/"},
+  {"provider":"Moonshot","display":"Kimi (latest)","litellm_key":"moonshot/kimi-latest","buy_url":"https://platform.moonshot.cn/"},
 
-  {"provider":"xAI","display":"Grok 4","litellm_key":"xai/grok-4"},
+  {"provider":"xAI","display":"Grok 4","litellm_key":"xai/grok-4","buy_url":"https://x.ai/api"},
 
-  {"provider":"Meta","display":"Llama 4 Maverick","litellm_key":"deepinfra/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8"},
-  {"provider":"Meta","display":"Llama 4 Scout","litellm_key":"deepinfra/meta-llama/Llama-4-Scout-17B-16E-Instruct"},
+  {"provider":"Meta","display":"Llama 4 Maverick","litellm_key":"deepinfra/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8","buy_url":"https://www.llama.com/"},
+  {"provider":"Meta","display":"Llama 4 Scout","litellm_key":"deepinfra/meta-llama/Llama-4-Scout-17B-16E-Instruct","buy_url":"https://www.llama.com/"},
 
-  {"provider":"Mistral","display":"Mistral Large (latest)","litellm_key":"mistral/mistral-large-latest"},
-  {"provider":"Mistral","display":"Mistral Medium","litellm_key":"mistral/mistral-medium-2505"}
+  {"provider":"Mistral","display":"Mistral Large (latest)","litellm_key":"mistral/mistral-large-latest","buy_url":"https://mistral.ai/pricing"},
+  {"provider":"Mistral","display":"Mistral Medium","litellm_key":"mistral/mistral-medium-2505","buy_url":"https://mistral.ai/pricing"}
 ]
