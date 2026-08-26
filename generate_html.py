@@ -143,8 +143,11 @@ def run(data):
   th {{ background:#f0f4ff; color:#1a1a1a; }}
   tbody tr:nth-child(even) {{ background:#fafbfc; }}
   a.buy {{ display:inline-block; background:#2563eb; color:#fff; text-decoration:none;
-          padding:3px 10px; border-radius:6px; font-size:12px; font-weight:600; }}
+          padding:5px 14px; border-radius:8px; font-size:13px; font-weight:600;
+          border:1px solid #1d4ed8; box-shadow:0 1px 2px rgba(0,0,0,.12);
+          transition: background .15s, transform .05s; }}
   a.buy:hover {{ background:#1d4ed8; }}
+  a.buy:active {{ transform: translateY(1px); }}
   .note {{ color:#888; font-size:13px; }}
   .chart {{ background:#fff; border:1px solid #e6e8ec; border-radius:12px; padding:20px; }}
   .chart-title {{ font-weight:700; margin-bottom:4px; }}
@@ -182,15 +185,17 @@ def run(data):
   <section>
     <h2>一、订阅 / 套餐价格</h2>
     <table>
-      <thead><tr><th>厂商</th><th>套餐</th><th>价格</th><th>包含 / 额度</th><th>备注</th></tr></thead>
+      <thead><tr><th>厂商</th><th>套餐</th><th>价格</th><th>包含 / 额度</th><th>备注</th><th>购买</th></tr></thead>
       <tbody>
 """)
 
     for s in sub:
+        buy = f'<a class="buy" href="{s["buy_url"]}" target="_blank">官网 ↗</a>' if s.get("buy_url") else "—"
         parts.append(
             f"<tr><td>{s.get('provider','')}</td><td>{s.get('plan','')}</td>"
             f"<td>{s.get('price','')}</td><td>{s.get('included','')}</td>"
-            f"<td class='note'>{s.get('note','')}</td></tr>"
+            f"<td class='note'>{s.get('note','')}</td>"
+            f"<td>{buy}</td></tr>"
         )
 
     parts.append("</tbody></table></section>")

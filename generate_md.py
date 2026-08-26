@@ -71,12 +71,13 @@ def run(data):
     L.append("> ⚠️ 本表为公开整理，**仅供参考，请以各厂商官网实时报价为准**。\n")
 
     L.append("## 一、订阅 / 套餐价格\n")
-    L.append("| 厂商 | 套餐 | 价格 | 包含 / 额度 | 备注 |")
-    L.append("| --- | --- | --- | --- | --- |")
+    L.append("| 厂商 | 套餐 | 价格 | 包含 / 额度 | 备注 | 购买 |")
+    L.append("| --- | --- | --- | --- | --- | --- |")
     for s in sub:
+        buy = ("[" + ("官网" if s.get("buy_url") else "—") + "](" + s["buy_url"] + ")") if s.get("buy_url") else "—"
         L.append(
             f"| {s.get('provider','')} | {s.get('plan','')} | {s.get('price','')} "
-            f"| {s.get('included','')} | {s.get('note','')} |"
+            f"| {s.get('included','')} | {s.get('note','')} | {buy} |"
         )
     L.append("")
 
