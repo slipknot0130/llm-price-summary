@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import fetch_prices
 import generate_md
+import generate_html
 
 
 def main():
@@ -33,8 +34,10 @@ def main():
             print("⚠️ 在线价格拉取失败，已回退到本地缓存（数据可能不是最新的）。"
                   "建议联网后重新运行 `python main.py`。")
 
-    out = generate_md.run(data)
-    print("已生成：" + out)
+    out_md = generate_md.run(data)
+    print("已生成：" + out_md)
+    out_html = generate_html.run(data)
+    print("已生成：" + out_html)
 
 
 if __name__ == "__main__":

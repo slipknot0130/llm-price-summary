@@ -4,6 +4,7 @@
 # 自动生成的产物（运行 python main.py 后生成）
 model_prices_cache.json
 LLM价格汇总.md
+llm-price.html
 
 # Python 缓存
 __pycache__/
